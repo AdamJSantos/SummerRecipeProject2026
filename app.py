@@ -7,9 +7,24 @@ import streamlit as st
 import warnings
 from langchain import LLMChain
 from langchain.prompts import PromptTemplate
-from longchain.llms import OpenAi 
+from longchain.llms import OpenAi
 
 warnings.filterwarnings("ignore")
+
+template = """
+You are a chef who is extremely adaptable and capable when it comes to creating multilple types of dishes with just a few ingredients.
+Please create a recipe using the following ingredients: {ingredients}
+The recipe should include the name of the dish, a list of ingredients, step-by-step instructions, and the measurements."""
+
+prompt = PromptTemplate( 
+    input_variables=["ingredients"],
+    template=template
+)
+
+#Might have to change this later
+llm = OpenAI()
+
+recipe_generator = LLMChain(llm=llm, prompt=prompt)
 
 st.title("Ai Recipe Creator")
 
@@ -19,8 +34,10 @@ st.write("Welcome to the AI Recipe Creator! This app uses the power of AI to gen
 
 ingredients = st.text_area("Ingredients")
 
-template = """
-You are a chef who is extremely adaptable and capable when it comes to creating multilple types of dishes with just a few ingredients.
-Please create a recipe using the following ingredients: {ingredients}
-The recipe should include the name of the dish, a list of ingredients, step-by-step instructions, and the measurements."""
-
+if st.button("Generate a Recipe"):
+    if ingredients:
+        recipe = recipe_generator.run(ingredients)
+        st.subheader("Generated Recipe")
+        st.write(recipe)
+    else:
+        st.error("Please enter some ingredients to generate a recipe.")
