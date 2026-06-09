@@ -6,8 +6,14 @@
 import streamlit as st
 import warnings
 from langchain import LLMChain
-from langchain.prompts import PromptTemplate
-from longchain.llms import OpenAi
+
+#Was originally: langchain.prompts import PromptTemplate
+#could cause problems later
+from langchain import PromptTemplate
+
+#Was originally langchain.llms but swapped to langchain.chat_models
+#could cause problems later
+from langchain.chat_models import OpenAI
 
 warnings.filterwarnings("ignore")
 
