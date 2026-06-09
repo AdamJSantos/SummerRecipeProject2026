@@ -1,2 +1,26 @@
-#Adam Santos
-#6/9/2026 Project Started, Main File
+#Adam Santos 6/9/2026
+
+#Might have to swap out OpenAI for Gemini
+#Will come back to this later, likely will be
+#an irritating process to swap code-wise
+import streamlit as st
+import warnings
+from langchain import LLMChain
+from langchain.prompts import PromptTemplate
+from longchain.llms import OpenAi 
+
+warnings.filterwarnings("ignore")
+
+st.title("Ai Recipe Creator")
+
+st.divider()
+
+st.write("Welcome to the AI Recipe Creator! This app uses the power of AI to generate delicious recipes based on your preferences. Whether you're looking for a quick weeknight meal or a gourmet dish, simply input your desired ingredients and let the AI do the rest. Get ready to discover new culinary delights and impress your friends and family with your cooking skills!")
+
+ingredients = st.text_area("Ingredients")
+
+template = """
+You are a chef who is extremely adaptable and capable when it comes to creating multilple types of dishes with just a few ingredients.
+Please create a recipe using the following ingredients: {ingredients}
+The recipe should include the name of the dish, a list of ingredients, step-by-step instructions, and the measurements."""
+
