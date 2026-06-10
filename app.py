@@ -1,19 +1,21 @@
-#Adam Santos 6/9/2026
+# Adam Santos 6/9/2026
 
-#Might have to swap out OpenAI for Gemini
-#Will come back to this later, likely will be
-#an irritating process to swap code-wise
+# Might have to swap out OpenAI for Gemini
+# Will come back to this later, likely will be
+# an irritating process to swap code-wise
 import streamlit as st
 import warnings
-from langchain import LLMChain
+# from langchain import LLMChain
 
-#Was originally: langchain.prompts import PromptTemplate
-#could cause problems later
+# Was originally: langchain.prompts import PromptTemplate
+# could cause problems later
 from langchain_core.prompts import PromptTemplate
 
-#Was originally langchain.llms but swapped to langchain.chat_models
-#could cause problems later
-from langchain.chat_models import Gemini
+# Was originally langchain.llms but swapped to langchain.chat_models
+# could cause problems later
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+from recipe_generation import recipe_chain
 
 warnings.filterwarnings("ignore")
 
@@ -22,15 +24,16 @@ You are a chef who is extremely adaptable and capable when it comes to creating 
 Please create a recipe using the following ingredients: {ingredients}
 The recipe should include the name of the dish, a list of ingredients, step-by-step instructions, and the measurements."""
 
-prompt = PromptTemplate( 
+prompt = PromptTemplate(
     input_variables=["ingredients"],
     template=template
 )
 
-#Might have to change this later
-llm = Gemini()
+# Might have to change this later
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.5-flash", temperature=0.9, max_tokens=2048)
 
-recipe_generator = LLMChain(llm=llm, prompt=prompt)
+recipe_generator = recipe_chain
 
 st.title("Ai Recipe Creator")
 
