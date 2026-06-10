@@ -9,11 +9,11 @@ from langchain import LLMChain
 
 #Was originally: langchain.prompts import PromptTemplate
 #could cause problems later
-from langchain import PromptTemplate
+from langchain_core.prompts import PromptTemplate
 
 #Was originally langchain.llms but swapped to langchain.chat_models
 #could cause problems later
-from langchain.chat_models import OpenAI
+from langchain.chat_models import Gemini
 
 warnings.filterwarnings("ignore")
 
@@ -28,7 +28,7 @@ prompt = PromptTemplate(
 )
 
 #Might have to change this later
-llm = OpenAI()
+llm = Gemini()
 
 recipe_generator = LLMChain(llm=llm, prompt=prompt)
 
