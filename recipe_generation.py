@@ -11,14 +11,13 @@ os.environ["GEMINI_API_KEY"] = gemini_api_key
 # prompt for LLMChain
 template = """You are a chef who is extremely adaptable and capable when it comes to creating multilple types of dishes with just a few ingredients.
 Please create a recipe using the following ingredients: {ingredients}
-The recipe should include the name of the dish, a list of ingredients, step-by-step instructions, and the measurements."""
+The recipe should include the name of the dish and a list of the ingredients."""
 
 prompt = PromptTemplate(template=template, input_variables=["ingredients"])
 
 #
 llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash", temperature=0.9, max_tokens=2048)
-
+    model="gemini-2.5-flash", temperature=0.9, max_tokens=30000)
 
 recipe_chain = prompt | llm | StrOutputParser()
 

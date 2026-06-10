@@ -22,7 +22,7 @@ warnings.filterwarnings("ignore")
 template = """
 You are a chef who is extremely adaptable and capable when it comes to creating multilple types of dishes with just a few ingredients.
 Please create a recipe using the following ingredients: {ingredients}
-The recipe should include the name of the dish, a list of ingredients, step-by-step instructions, and the measurements."""
+The recipe should just display the amount of ingredients and instructions on how to make the dish."""
 
 prompt = PromptTemplate(
     input_variables=["ingredients"],
@@ -31,7 +31,7 @@ prompt = PromptTemplate(
 
 # Might have to change this later
 llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash", temperature=0.9, max_tokens=2048)
+    model="gemini-2.5-flash", temperature=0.9, max_tokens=30000)
 
 recipe_generator = recipe_chain
 
