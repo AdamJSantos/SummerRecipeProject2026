@@ -45,7 +45,7 @@ ingredients = st.text_area("Ingredients")
 
 if st.button("Generate a Recipe"):
     if ingredients:
-        recipe = recipe_generator.run(ingredients)
+        recipe = recipe_generator.invoke(ingredients)
         st.subheader("Generated Recipe")
         st.write(recipe)
     else:
